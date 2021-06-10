@@ -1,5 +1,5 @@
 const applicationState = {
-
+  requests: []
 }
 
 const API = "http://localhost:8088"
@@ -13,4 +13,9 @@ export const fetchRequests = () => {
                 applicationState.requests = serviceRequests
             }
         )
+}
+
+
+export const getRequests = () => {
+    return applicationState.requests.map(request => ({...request}))
 }
