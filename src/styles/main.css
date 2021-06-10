@@ -16,5 +16,18 @@ textarea {
 h1,h2,h3,h4,h5,h6 {
   font-family: "Patua One", serif;
   letter-spacing: 2px;
+  margin-left: .5em;
 }
 
+main {
+    background-image: url("https://media.gettyimages.com/photos/carpenters-butt-picture-id157435035?k=6&m=157435035&s=612x612&w=0&h=t7giv9ynnnaUAIdT8MDhqyU7o1GsCWW9NwA18V8MVHU=");
+    background-repeat: no-repeat;
+    background-size: 1450px;
+    background-position: center;
+    background-position: initial;
+    border: solid;
+      border-color: #6eb6e6;
+      border-radius: 10px;
+      max-width: 1450px;
+      margin-left: 1em;
+}

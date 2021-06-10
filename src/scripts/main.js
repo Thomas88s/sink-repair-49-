@@ -6,13 +6,14 @@ fetchRequests()
 
 const mainContainer = document.querySelector("#container")
 
-const render = () => {
+export const render = () => {
     fetchRequests().then(
         () => {
             mainContainer.innerHTML = SinkRepair()
         }
-    )
-}
-
-render()
-
+        )
+    }
+    
+    render()
+    
+  
