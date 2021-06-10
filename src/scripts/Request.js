@@ -1,5 +1,13 @@
-import { getRequests } from "./dataAccess.js"
+import { getRequests, deleteRequest } from "./dataAccess.js"
 
+const mainContainer = document.querySelector("#container")
+
+mainContainer.addEventListener("click", click => {
+    if (click.target.id.startsWith("request--")) {
+        const [,requestId] = click.target.id.split("--")
+        deleteRequest(parseInt(requestId))
+    }
+})
 
 export const Requests = () => {
     const requests = getRequests()
@@ -7,10 +15,16 @@ export const Requests = () => {
     let html = "<ul>"
      
     const listItems = requests.map(request => {
-        return `<li>
-                ${request.description}
-                </li>`
+        return `
+    <li>
+        ${request.description}
+        <button class="button"
+                id="request--${request.id}">
+            Delete
+        </button>
+    </li>`
     })
+    
              
     html += listItems.join("")
     html += "</ul>"
@@ -19,3 +33,5 @@ export const Requests = () => {
 
     return html
 }
+
+
