@@ -12,9 +12,16 @@ mainContainer.addEventListener("click", click => {
 export const Requests = () => {
     const requests = getRequests()
     const plumbers = getPlumbers()
+
+    const sortedRequests = request.sort((a,b) => {
+        return parseInt(a.date.split("-").join("")) - parseInt(b.date.split("-").join(""))
+      })
+
+
+
     let html = "<ul>"
      
-    const listItems = requests.map(request => {
+    const listItems = sortedRequests.map(request => {
         return `
     <li class="request">
         ${request.description}        &nbsp;&nbsp;&nbsp;       
