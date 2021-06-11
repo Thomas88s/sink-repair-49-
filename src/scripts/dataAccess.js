@@ -2,8 +2,10 @@ import { render } from "./main.js"
 
 
 const applicationState = {
-  requests: []
+  requests: [],
+  plumbers: []
 }
+
 const mainContainer = document.querySelector("#container")
 
 const API = "http://localhost:8088"
@@ -19,6 +21,26 @@ export const fetchRequests = () => {
         )
 }
 
+export const fetchPlumbers = () => {
+    return fetch(`${API}/plumbers`)
+        .then(response => response.json())
+        .then(
+            (servicePlumbers) => {
+                // Store the external state in application state
+                applicationState.plumbers = servicePlumbers
+            }
+        )
+}
+
+export const getRequests = () => {
+    return applicationState.requests.map(request => ({...request}))
+}
+
+export const getPlumbers = () => {
+    return applicationState.plumbers.map(plumber => ({...plumber}))
+}
+
+
 mainContainer.addEventListener(
     "stateChanged",
     customEvent => {
@@ -28,9 +50,6 @@ mainContainer.addEventListener(
 )
 
 
-export const getRequests = () => {
-    return applicationState.requests.map(request => ({...request}))
-}
 
 export const sendRequest = (userServiceRequest) => {
     const fetchOptions = {
