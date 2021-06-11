@@ -3,7 +3,8 @@ import { render } from "./main.js"
 
 const applicationState = {
   requests: [],
-  plumbers: []
+  plumbers: [],
+  completions: []
 }
 
 const mainContainer = document.querySelector("#container")
@@ -32,6 +33,18 @@ export const fetchPlumbers = () => {
         )
 }
 
+export const fetchCompletions = () => {
+    return fetch(`${API}/completions`)
+        .then(response => response.json())
+        .then(
+            (serviceCompletions) => {
+                // Store the external state in application state
+                applicationState.completions = serviceCompletions
+            }
+        )
+}
+
+
 export const getRequests = () => {
     return applicationState.requests.map(request => ({...request}))
 }
@@ -39,6 +52,11 @@ export const getRequests = () => {
 export const getPlumbers = () => {
     return applicationState.plumbers.map(plumber => ({...plumber}))
 }
+
+export const getCompletions = () => {
+    return applicationState.completions.map(completion => ({...completion}))
+}
+
 
 
 mainContainer.addEventListener(
@@ -65,6 +83,24 @@ export const sendRequest = (userServiceRequest) => {
         .then(response => response.json())
         .then(() => {
             mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+
+        })
+}
+
+export const saveCompletion = (completion) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(completion)
+    }
+
+
+    return fetch(`${API}/completions`, fetchOptions)
+        .then(response => response.json())
+        .then(() => {
+            // mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
 
         })
 }
