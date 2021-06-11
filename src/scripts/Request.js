@@ -1,5 +1,5 @@
 import { getRequests, deleteRequest, getPlumbers } from "./dataAccess.js"
-
+import { saveCompletion } from "./dataAccess.js"
 const mainContainer = document.querySelector("#container")
 
 mainContainer.addEventListener("click", click => {
@@ -17,7 +17,7 @@ export const Requests = () => {
     const listItems = requests.map(request => {
         return `
     <li class="request">
-        ${request.description}              
+        ${request.description}        &nbsp;&nbsp;&nbsp;       
         <select class="plumbers" id="plumbers">
         <option value="">Choose</option>
             ${
@@ -43,6 +43,32 @@ export const Requests = () => {
     return html
 }
 
-
+mainContainer.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.id === "plumbers") {
+            const [requestId, plumberId] = event.target.value.split("--")  
+            /*
+                This object should have 3 properties
+                   1. requestId
+                   2. plumberId
+                   3. date_created
+            */
+          
+            const completion = { 
+                request: requestId,
+                plumber: plumberId,
+                date_created: new Date() 
+            }
+            
+            /*
+                Invoke the function that performs the POST request
+                to the `completions` resource for your API. Send the
+                completion object as a parameter.
+             */
+                saveCompletion(completion)
+        }
+    }
+)
 
 
