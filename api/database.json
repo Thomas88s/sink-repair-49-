@@ -1,5 +1,14 @@
 {
-  "plumbers": [],
+  "plumbers": [
+      {
+        "id": 1,
+        "name": "Maude"
+      },
+      {
+        "id": 2,
+        "name": "Merle" 
+      }
+  ],
   "completions": [],
   "requests": [
     {
@@ -15,6 +24,13 @@
       "budget": "50000",
       "neededBy": "2021-06-10",
       "id": 2
+    },
+    {
+      "description": "Finally finished",
+      "address": "nashville",
+      "budget": "3.50",
+      "neededBy": "2021-06-10",
+      "id": 3
     }
   ]
 }
